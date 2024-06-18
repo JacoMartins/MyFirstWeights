@@ -1,3 +1,5 @@
+// TechSkillsCapitalistData: Array of objects with the following structure:
+
 const TechSkillsCapitalistData = [
     {
         id: 1,
@@ -145,6 +147,8 @@ const TechSkillsCapitalistData = [
     },
 ];
 
+// MyTechSkills: Array of objects with the following structure:
+
 const MyTechSkills = [
     { title: 'Redes de Computadores', experience: 5 },
     { title: 'Tecnologias Web', experience: 5 },
@@ -164,6 +168,8 @@ const MyTechSkills = [
     { title: 'Laravel', experience: 2 },
 ]
 
+// MatchSkill: Function that receives the capitalistData, a skill and yourWeight and returns an object with the skill and the experience level.
+
 function MatchSkill(capitalistData, skill, yourWeight) {
     try {
         const skillData = capitalistData.find((iteratedSkill) => iteratedSkill.title === skill.title)
@@ -174,7 +180,6 @@ function MatchSkill(capitalistData, skill, yourWeight) {
 
         const matchSum = skillData.weight + yourWeight
         const matchMean = matchSum / 2
-
 
         const result = {
             skill,
@@ -187,6 +192,8 @@ function MatchSkill(capitalistData, skill, yourWeight) {
     }
 }
 
+// experienceCalculus: Function that receives a number and returns a number that represents the experience level.
+
 const experienceCalculus = (experience) => {
     if (experience < 1) return 1;
     if (experience < 3) return 2;
@@ -194,6 +201,8 @@ const experienceCalculus = (experience) => {
     if (experience < 8) return 4;
     return 5;
 }
+
+// experienceToLanguage: Function that receives a number and returns a string that represents the experience level.
 
 const experienceToLanguage = (experience) => {
     if (experience < 1) return 'Básico';
@@ -203,12 +212,11 @@ const experienceToLanguage = (experience) => {
     return 'Mestre';
 }
 
-function getMyTechSkillsData() {
-    return `Você tem as seguintes habilidades:
-    ${MyTechSkills.map((skill, experience) => {
-        const match = MatchSkill(TechSkillsCapitalistData, skill, experience)
-        return `${skill.title} - ${experienceToLanguage(match.experience)}`
-    }).join('\n')}`
-}
+// getMyTechSkillsData: Function that returns a string with the skills and experience level.
 
-console.log(getMyTechSkillsData())
+function getMyTechSkillsData() {
+    return `Você tem as seguintes habilidades:\n\t${MyTechSkills.map((skill) => {
+        const match = MatchSkill(TechSkillsCapitalistData, skill, skill.experience)
+        return `${skill.title} - ${experienceToLanguage(match.experience)}`
+    }).join('\n\t')}`
+}
